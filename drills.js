@@ -13,17 +13,19 @@
 
 
 // ================================================ RECURSIVE ===================================>
-// const countSheep = sheepNum => {
+const countSheep = sheepNum => {
   
-//   // Set a base condition of 0 sheep. If the remaining amount of sheep is 0, end the function
-//   if (sheepNum === 0) {
-//     return;
-//   }
+  // Set a base condition of 0 sheep. If the remaining amount of sheep is 0, end the function
+  if (sheepNum === 0) {
+    return;
+  }
 
-//   console.log(`${sheepNum} - Another sheep jumped over the fence`);
-//   countSheep(sheepNum -1);
+  console.log(`${sheepNum} - Another sheep jumped over the fence`);
+  countSheep(sheepNum -1);
 
-// };
+};
+
+// bigO:  O(n);
 
 
 // countSheep(10);
@@ -31,48 +33,53 @@
 
 // ================================================ ITERATIVE =====================================>
 
-// const countSheepIterate = sheepNum => {
-//   for(let i=sheepNum; i!==0; i--) {
-//     console.log(`${i} - Another sheep jumped over the fence`);
-//   }
-// };
+const countSheepIterate = sheepNum => {
+  for(let i=sheepNum; i!==0; i--) {
+    console.log(`${i} - Another sheep jumped over the fence`);
+  }
+};
 
 // countSheepIterate(10);
 
-
+//bigO: O(n);
 
 
 // Array Double
 
 // ======================================= RECURSIVE================ === === === === === >
 
+let counter = 0;
+const arrayDouble = arr => {
+  counter++;
+  if (arr.length === 0) {
+    return [];
+  }
+  console.log('counter',counter);
+  return [(arr[0]*2), ...arrayDouble(arr.slice(1))];
+};
 
-// const arrayDouble = arr => {
-//   if (arr.length === 0) {
-//     return [];
-//   }
+//bigO: O(n)
 
-//   return [(arr[0]*2), ...arrayDouble(arr.slice(1))];
-// };
-
-// arrayDouble([1,2,3]);
+// arrayDouble([1,2,3,4,5,6,7,8]);
 
 
 // ======================================= ITERATIVE ================ === === === === === >
 
 
-const arrayDouble = arr => {
-  const newArr = [];
+// const arrayDouble = arr => {
+//   const newArr = [];
 
-  for(let i=0;i<arr.length;i++) {
-    newArr[i] = arr[i]*2;
-  }
+//   for(let i=0;i<arr.length;i++) {
+//     newArr[i] = arr[i]*2;
+//   }
 
-  return newArr;
-};
+//   return newArr;
+// };
 
-arrayDouble([1,2,3]);
+// arrayDouble([1,2,3]);
 
+
+// BigO O(n)
 
 
 
@@ -82,31 +89,34 @@ arrayDouble([1,2,3]);
 //   if (str === '') {
 //     return '';
 //   }
-
+//   counter++;
+//   console.log('counter',counter);
 //   return (reverseStr(str.slice(1)) + str[0]);
-
 // };
 
+// bigO:  O(n);
 
+// reverseStr('hellohellohello');
 
 // ======================================= ITERATIVE ================ === === === === === >
 
 
-// const reverseStr = str => {
-//   if (str.length === 0) {
-//     return '';
-//   }
-//   let newStr = '';
+const reverseStr = str => {
+  if (str.length === 0) {
+    return '';
+  }
+  let newStr = '';
 
-//   for(let i=0; i<str.length; i++)  {
-//     newStr = str[i] + newStr;
-//   }
+  for(let i=0; i<str.length; i++)  {
+    newStr = str[i] + newStr;
+    counter++;
+  }
+  console.log('counter',counter);
+  return newStr;
+};
 
-//   return newStr;
-// };
-
-
-
+// reverseStr('hello11');
+// bigO: O(n);
 
 // ======================================= RECURSIVE================ ===|= ===|= ===|= ===|= ===|= >
 
@@ -116,16 +126,20 @@ arrayDouble([1,2,3]);
 
 // // Example: Input:2, Output: 3
 
-// const calculateNthTriangle = num => {
-//   if (num===1) {
-//     return num;
-//   }
+const calculateNthTriangle = num => {
+  if (num===1) {
+    return num;
+  }
 
-//   return calculateNthTriangle(num-1) + num;
+  counter++;
+  console.log('counter',counter);
+  return calculateNthTriangle(num-1) + num;
 
-// };
+};
 
-// console.log(calculateNthTriangle(9));
+// console.log(calculateNthTriangle(11));
+
+// bigO: O(n);
 
 
 //=================================================================================================>
@@ -146,12 +160,15 @@ function split (string, delimeter ) {
     return [string];
   }
 
-
+  counter++;
+  console.log(counter,'counter');
   // slice from beginning of string to the location of the delimeter
   return [string.slice(0,delimIndex), ...split(string.slice(delimIndex+delimeter.length), delimeter)];
 }
 
-console.log(split('1//21/2018','//'));  
+// console.log(split('1/21/20182341234123/42341234123412341241234123412/341234','/'));  
+
+//BigO O(n);
 
 
 
@@ -184,6 +201,8 @@ const repInBin = num => {
   return (repInBin(Math.floor(num/2))).toString() + (num%2).toString();
 };
 
+//BigO:  O(n);
+
 
 
 //==============================================================Factorials
@@ -204,7 +223,7 @@ const factorialize = num => {
   return factorialize(num-1) * num;
 };
 
-
+//BigO: O(n);
 
 //======================================================================Fibonacci
 
@@ -238,10 +257,16 @@ const fibonaccize = num => {
   if (num<2)
     return num;
 
-
+  counter++;
+  console.log('counter',counter);
   return (fibonaccize(num-2) + fibonaccize(num-1));
   
 };
+
+//BigO: O(n^2)
+
+
+fibonaccize(7);
 
 // Flatten This Array
 // var arr = [5, 1, 23, 45, [], [1,8,9,0,5],[[1,2, 345, 78, 899]]];
@@ -263,14 +288,13 @@ const traverse = (arrOfObj, parent) => {
 	
   arrOfObj.filter(cat => cat.parent === parent)
     .forEach(elm => { 
-	 node[elm.id] = traverse(arrOfObj, elm.id);
+      node[elm.id] = traverse(arrOfObj, elm.id);
     });
   return node;
 };
 
-
-traverse(animalHierarchy,null);
-
+// traverse(animalHierarchy,null);
+//BIGO:  O(n);
 
 let organization = {
   'Zuckerberg': {		
@@ -344,3 +368,5 @@ const organize = (data,depth=0) => {
     organize(data[key], depth+1);
   });
 };
+
+// bigO: O(n);
