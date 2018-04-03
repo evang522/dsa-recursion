@@ -208,31 +208,65 @@ const factorialize = num => {
 
 //======================================================================Fibonacci
 
-// /**
-//  * Fibonaccize: Print the fibonnaci sequence of an Nth number
-//  * @param {number} num The index of the fibonacci sequence to print
-//  */
-// const fibonaccize = num => {
-//   if (num === 0) {
-//     return 0;
-//   }
-
-//   return (num-1);
-// };
-
 
 // We need to return the number of the fibonacci sequence of the supplied index.
 // So, if the number supplied is 4, we need to return 5
     
 
-const fibonaccize = num => {
+// const fibonaccize = num => {
 
-  if (num === 1) {
-    return [0];
-  }
-  let fibo = [0,1];
-  for(let i=2; i<num; i++) {
-    fibo[i] = fibo[i-1] + fibo[i-2];
-  }
-  return fibo;
+//   if (num === 1) {
+//     return [0];
+//   }
+//   let fibo = [0,1];
+//   for(let i=2; i<num; i++) {
+//     fibo[i] = fibo[i-1] + fibo[i-2];
+//   }
+//   return fibo[num-1];
+// };
+
+
+
+// INTERVIEW QUESTION
+/**
+ * Fibonaccize: Print the fibonnaci sequence of an Nth number
+ * @param {number} num The index of the fibonacci sequence to print
+ */
+
+// Need to calculate out the fibonacci sequence to the index specified by the number, then return the 
+const fibonaccize = num => {
+  if (num<2)
+    return num;
+
+
+  return (fibonaccize(num-2) + fibonaccize(num-1));
+  
 };
+
+// Flatten This Array
+// var arr = [5, 1, 23, 45, [], [1,8,9,0,5],[[1,2, 345, 78, 899]]];
+
+
+
+const animalHierarchy = [
+  {id: 'Animals', parent: null},
+  {id: 'Mammals', parent: 'Animals'},
+  {id: 'Dogs', parent:'Mammals' },
+  {id: 'Cats', parent:'Mammals' },
+  {id: 'Golden Retriever', parent: 'Dogs'},
+  {id: 'Husky', parent:'Dogs' },
+  {id: 'Bengal', parent:'Cats' }
+]
+
+const traverse = (arrOfObj, parent) => {
+  const node = {};
+	
+  arrOfObj.filter(cat => cat.parent === parent)
+    .forEach(elm => {
+			 node[elm.id] = traverse(arrOfObj, elm.id);
+    });
+  return node;
+};
+
+
+traverse(animalHierarchy,null);
